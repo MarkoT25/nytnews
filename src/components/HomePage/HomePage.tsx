@@ -1,17 +1,17 @@
 import React from "react";
-import { HomePageHeader } from "./HomePageHeader/HomePageHeader";
-import { HomePageMain } from "./HomePageMain/HomePageMain";
-import styles from "./HomePageContainer.module.scss";
+import { Header } from "./Header/Header";
+import { NewsFeedSection } from "./NewsFeedSection/NewsFeedSection";
+import styles from "./HomePage.module.scss";
 import {
   Favorite,
   LatestNewsArticleType,
   NYTimesArticle,
   UserType,
 } from "@/types/index";
-import { HomePageTypeSelector } from "./HomePageTypeSelector";
-import { LatestNewsWidget } from "./HomePageMain/LatestNewsWidget/LatestNewsWidget";
+import { TypeSelector } from "./TypeSelector";
+import { LatestNewsWidget } from "./NewsFeedSection/LatestNewsWidget/LatestNewsWidget";
 
-interface HomePageContainerProps {
+interface HomePageProps {
   articles?: NYTimesArticle[];
   favorites?: Favorite[];
   latestNews?: LatestNewsArticleType[];
@@ -23,20 +23,20 @@ interface HomePageContainerProps {
   };
 }
 
-export const HomePageContainer = ({
+export const HomePage = ({
   articles,
   favorites,
   latestNews,
   user,
   searchParams,
-}: HomePageContainerProps) => {
+}: HomePageProps) => {
   const newsType = searchParams?.type || "Featured";
   return (
     <div className={styles.pageContainer}>
-      <HomePageHeader user={user} />
-      <HomePageTypeSelector />
+      <Header user={user} />
+      <TypeSelector />
       <div className={styles.desktopMain}>
-        <HomePageMain
+        <NewsFeedSection
           articles={articles}
           favorites={favorites}
           latestNews={latestNews}
@@ -44,7 +44,7 @@ export const HomePageContainer = ({
       </div>
       <div className={styles.mobileMain}>
         {newsType === "Featured" ? (
-          <HomePageMain
+          <NewsFeedSection
             articles={articles}
             favorites={favorites}
             latestNews={latestNews}

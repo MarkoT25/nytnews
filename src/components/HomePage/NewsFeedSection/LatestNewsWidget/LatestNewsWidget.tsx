@@ -7,7 +7,7 @@ import { ArrowRightIcon } from "@/components/svg/ArrowRightIcon";
 import { LatestNewsArticleType } from "@/types/index";
 import { LatestNewsArticle } from "./LatestNewsArticle";
 import Link from "next/link";
-import { LoadingSpinner } from "@/components/Custom/LoadingSpinner";
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 
 interface LatestNewsWidgetProps {
   initialArticles?: LatestNewsArticleType[];

@@ -2,19 +2,19 @@
 
 import React from "react";
 import styles from "./HomePageMainCategories.module.scss";
-import { HomePageMainCategory } from "./HomePageMainCategory";
+import { Category } from "./Category";
 import { useRouter } from "next/navigation";
 import { CATEGORIES } from "@/util/categories";
 
-interface HomePageMainCategoriesProps {
+interface CategoriesProps {
   type?: "desktop" | "mobile";
   closeMobileNav?: () => void;
 }
 
-export const HomePageMainCategories = ({
+export const Categories = ({
   type = "desktop",
   closeMobileNav,
-}: HomePageMainCategoriesProps) => {
+}: CategoriesProps) => {
   const router = useRouter();
 
   const handleActiveTabChange = (tab: string) => {
@@ -32,7 +32,7 @@ export const HomePageMainCategories = ({
       }
     >
       {CATEGORIES.map((category) => (
-        <HomePageMainCategory
+        <Category
           key={category.name}
           category={category}
           handleTabChange={handleActiveTabChange}

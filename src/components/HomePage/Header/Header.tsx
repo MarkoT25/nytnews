@@ -2,7 +2,7 @@
 
 import { NewsAppLogo } from "@/components/svg/NewsAppLogoIcon";
 import React, { useEffect, useState } from "react";
-import styles from "./HomePageHeader.module.scss";
+import styles from "./Header.module.scss";
 import { SearchIcon } from "@/components/svg/SearchIcon";
 import { BurgerMenuIcon } from "@/components/svg/BurgerMenuIcon";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -11,11 +11,11 @@ import { ProfileDropdown } from "./ProfileDropdown";
 import { UserType } from "@/types/index";
 import { IoCloseOutline } from "react-icons/io5";
 
-interface HomePageHeaderProps {
+interface HeaderProps {
   user: UserType | null;
 }
 
-export const HomePageHeader = ({ user }: HomePageHeaderProps) => {
+export const Header = ({ user }: HeaderProps) => {
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const searchParams = useSearchParams();

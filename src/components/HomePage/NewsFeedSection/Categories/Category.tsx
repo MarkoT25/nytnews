@@ -7,15 +7,15 @@ interface Category {
   icon: React.ComponentType<any>;
 }
 
-interface HomePageMainCategoryProps {
+interface CategoryProps {
   category: Category;
   handleTabChange: (tab: string) => void;
 }
 
-export const HomePageMainCategory = ({
+export const Category = ({
   category,
   handleTabChange,
-}: HomePageMainCategoryProps) => {
+}: CategoryProps) => {
   const searchParams = useSearchParams();
   const activeCategory = searchParams.get("category") || "Home";
   return (

@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import styles from "./HomePageContainer.module.scss";
+import styles from "./HomePage.module.scss";
 import { useRouter, useSearchParams } from "next/navigation";
 
 const options = ["Featured", "Latest"];
 
-export const HomePageTypeSelector = () => {
+export const TypeSelector = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const newsType = searchParams.get("type") || "Featured";
