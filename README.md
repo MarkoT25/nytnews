@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+# News App
+
+A full-stack application for browsing and bookmarking the latest news stories across multiple categories. Users can register, sign in, explore categorized news articles, bookmark favorites, and view them across the app.
+
+
 
 ## Getting Started
 
-First, run the development server:
+To get started, you'll need to clone the repository and install the dependencies. You'll also need to create copy the .env.example file to .env and fill in the necessary values.
+
+
+## Installation
+
+1. Clone the repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://github.com/MarkoT25/nytnews.git
+  cd nytnews
+```
+2. Install dependencies
+```bash
+   npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Create a `.env` file
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Running the Application
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Development mode:
+```
+npm run dev
+```
 
-## Learn More
+Production mode:
+```
+npm run build
+npm start
+```
+## Design
 
-To learn more about Next.js, take a look at the following resources:
+🧠 Design Decisions
+SSR-first Approach
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The application embraces server-side rendering (SSR) for all key data to ensure fast initial loads, minimal layout shift, and full SEO benefits. Pages are fully rendered on the server and hydrated on the client for dynamic interactivity where needed.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Infinite Scroll with Observables
 
-## Deploy on Vercel
+The "Latest News" section implements infinite scrolling using native Observables instead of a data-fetching library like TanStack Query. While TanStack Query is typically the go-to for managing server state.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Custom Auth with Server Actions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Authentication is fully custom-built using Next.js server actions, providing a lightweight, secure flow without relying on third-party libraries. All auth-related validation is handled using Zod, ensuring safe and predictable user input parsing at both client and server levels.
+
+Email Verification
+
+New users receive a verification link via email using Nodemailer. The email verification flow is fully integrated with the custom auth system and persists verification status in the database.
+
+Favoriting
+
+Favoriting articles is handled via Next.js API routes. It uses optimistic UI updates to immediately reflect changes in the interface, while persisting the state in the backend database. Favorited articles are shown across all categories and are accessible through a dedicated Favorites view in the sidebar.
+
+Sidebar UX
+
+The sidebar automatically collapses on navigation, improving usability on smaller screens. This was a deliberate UX decision to avoid persistent UI clutter and create a cleaner, focused reading experience.
+
+Ad Banner (Pin Prompt)
+
+A dismissible banner at the top of the screen encourages users to pin the app or set it as a homepage. Its dismissed state is stored in localStorage to persist between visits.
