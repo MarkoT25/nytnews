@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./MobileNavigation.module.scss";
@@ -45,13 +46,6 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
     }
   }, [isOpen]);
 
-  // // Sync searchQuery with URL when mobile nav opens
-  // useEffect(() => {
-  //   if (isOpen) {
-  //     setSearchQuery(searchParams.get("query") || "");
-  //   }
-  // }, [isOpen, searchParams]);
-
   // Deobounce search query and update URL
   useEffect(() => {
     if (!isOpen) return;
@@ -73,7 +67,6 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
       router.replace(`?${params.toString()}`, { scroll: false });
 
       setSearchQuery(debouncedQuery);
-
     }
   }, [debouncedQuery, router, searchParams, isOpen]);
 
@@ -89,7 +82,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
     return () => document.removeEventListener("keydown", handleEscapeKey);
   }, [isOpen, onClose]);
 
-    const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const params = new URLSearchParams(searchParams.toString());
