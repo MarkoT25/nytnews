@@ -20,7 +20,7 @@ export const HomePageHeader = ({ user }: HomePageHeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState(
-    searchParams.get("query") || ""
+    searchParams.get("query") || "",
   );
 
   useEffect(() => {
