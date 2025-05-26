@@ -12,21 +12,15 @@ import { UserType } from "@/types/index";
 import { IoCloseOutline } from "react-icons/io5";
 
 interface HomePageHeaderProps {
-  activeTab: string;
-  handleTabChange: (tab: string) => void;
   user: UserType | null;
 }
 
-export const HomePageHeader = ({
-  activeTab,
-  handleTabChange,
-  user,
-}: HomePageHeaderProps) => {
+export const HomePageHeader = ({ user }: HomePageHeaderProps) => {
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState(
-    searchParams.get("query") || "",
+    searchParams.get("query") || ""
   );
 
   useEffect(() => {
@@ -56,7 +50,7 @@ export const HomePageHeader = ({
 
   const handleClearSearch = () => {
     setSearchQuery("");
-    
+
     const params = new URLSearchParams(searchParams.toString());
     params.delete("query");
     router.push(`?${params.toString()}`);
@@ -76,8 +70,6 @@ export const HomePageHeader = ({
         <MobileNavigation
           isOpen={isMobileMenuOpen}
           onClose={() => setIsMobileMenuOpen(false)}
-          activeTab={activeTab}
-          handleTabChange={handleTabChange}
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
         />

@@ -1,10 +1,7 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { HomePageHeader } from "./HomePageHeader/HomePageHeader";
 import { HomePageMain } from "./HomePageMain/HomePageMain";
 import styles from "./HomePageContainer.module.scss";
-import { useSearchParams } from "next/navigation";
 import {
   Favorite,
   LatestNewsArticleType,
@@ -19,6 +16,11 @@ interface HomePageContainerProps {
   favorites?: Favorite[];
   latestNews?: LatestNewsArticleType[];
   user: UserType | null;
+  searchParams?: {
+    category?: string;
+    query?: string;
+    type?: string;
+  };
 }
 
 export const HomePageContainer = ({
@@ -26,42 +28,15 @@ export const HomePageContainer = ({
   favorites,
   latestNews,
   user,
+  searchParams,
 }: HomePageContainerProps) => {
-  const searchParams = useSearchParams();
-  const [activeTab, setActiveTab] = useState(
-    searchParams.get("category") || "Home",
-  );
-  const [newsType, setNewsType] = useState(
-    searchParams.get("type") || "Featured",
-  );
-
-  useEffect(() => {
-    setActiveTab(searchParams.get("category") || "Home");
-    setNewsType(searchParams.get("type") || "Featured");
-  }, [searchParams]);
-
-  const handleTabChange = (tab: string) => {
-    setActiveTab(tab);
-  };
-
-  const handleChangeNewsType = (type: string) => {
-    setNewsType(type);
-  };
+  const newsType = searchParams?.type || "Featured";
   return (
     <div className={styles.pageContainer}>
-      <HomePageHeader
-        activeTab={activeTab}
-        handleTabChange={handleTabChange}
-        user={user}
-      />
-      <HomePageTypeSelector
-        newsType={newsType}
-        handleTabChange={handleChangeNewsType}
-      />
+      <HomePageHeader user={user} />
+      <HomePageTypeSelector />
       <div className={styles.desktopMain}>
         <HomePageMain
-          activeTab={activeTab}
-          handleTabChange={handleTabChange}
           articles={articles}
           favorites={favorites}
           latestNews={latestNews}
@@ -70,8 +45,6 @@ export const HomePageContainer = ({
       <div className={styles.mobileMain}>
         {newsType === "Featured" ? (
           <HomePageMain
-            activeTab={activeTab}
-            handleTabChange={handleTabChange}
             articles={articles}
             favorites={favorites}
             latestNews={latestNews}

@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./LatestNewsWidget.module.scss";
 import { LatestNewsIcon } from "@/components/svg/LatestNewsIcon";

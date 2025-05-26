@@ -7,23 +7,23 @@ import { useRouter } from "next/navigation";
 import { CATEGORIES } from "@/util/categories";
 
 interface HomePageMainCategoriesProps {
-  activeTab: string;
-  handleTabChange: (tab: string) => void;
   type?: "desktop" | "mobile";
+  closeMobileNav?: () => void;
 }
 
 export const HomePageMainCategories = ({
-  activeTab,
-  handleTabChange,
   type = "desktop",
+  closeMobileNav,
 }: HomePageMainCategoriesProps) => {
   const router = useRouter();
 
   const handleActiveTabChange = (tab: string) => {
-    handleTabChange(tab);
     const params = new URLSearchParams(window.location.search);
     params.set("category", tab);
     router.replace(`?${params.toString()}`, { scroll: false });
+    if (type === "mobile" && closeMobileNav) {
+      closeMobileNav();
+    }
   };
   return (
     <div
@@ -33,9 +33,8 @@ export const HomePageMainCategories = ({
     >
       {CATEGORIES.map((category) => (
         <HomePageMainCategory
-          category={category}
           key={category.name}
-          activeTab={activeTab}
+          category={category}
           handleTabChange={handleActiveTabChange}
         />
       ))}

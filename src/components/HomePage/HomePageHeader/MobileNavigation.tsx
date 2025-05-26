@@ -11,8 +11,6 @@ import { HomePageMainCategories } from "../HomePageMain/HomePageMainCategories/H
 interface MobileNavigationProps {
   isOpen: boolean;
   onClose: () => void;
-  activeTab: string;
-  handleTabChange: (tab: string) => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
 }
@@ -20,8 +18,6 @@ interface MobileNavigationProps {
 export const MobileNavigation: React.FC<MobileNavigationProps> = ({
   isOpen,
   onClose,
-  activeTab,
-  handleTabChange,
   searchQuery,
   setSearchQuery,
 }) => {
@@ -138,14 +134,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
             />
           </form>
 
-          <HomePageMainCategories
-            activeTab={activeTab}
-            handleTabChange={(tab) => {
-              handleTabChange(tab);
-              onClose();
-            }}
-            type="mobile"
-          />
+          <HomePageMainCategories type="mobile" closeMobileNav={onClose} />
         </div>
       </div>
     </div>

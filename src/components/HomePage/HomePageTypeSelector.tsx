@@ -1,22 +1,17 @@
+"use client";
+
 import React from "react";
 import styles from "./HomePageContainer.module.scss";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const options = ["Featured", "Latest"];
 
-interface HomePageTypeSelectorProps {
-  newsType: string;
-  handleTabChange: (tab: string) => void;
-}
-
-export const HomePageTypeSelector = ({
-  newsType,
-  handleTabChange,
-}: HomePageTypeSelectorProps) => {
+export const HomePageTypeSelector = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const newsType = searchParams.get("type") || "Featured";
 
   const handleActiveTabChange = (tab: string) => {
-    handleTabChange(tab);
     const params = new URLSearchParams(window.location.search);
     params.set("type", tab);
     router.replace(`?${params.toString()}`, { scroll: false });
