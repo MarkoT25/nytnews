@@ -7,7 +7,6 @@ import { IoCloseOutline } from "react-icons/io5";
 import { NewsAppLogo } from "@/components/svg/NewsAppLogoIcon";
 import { SearchIcon } from "@/components/svg/SearchIcon";
 import { HomePageMainCategories } from "../HomePageMain/HomePageMainCategories/HomePageMainCategories";
-import { useDebounce } from "@/hooks/useDebounce";
 
 interface MobileNavigationProps {
   isOpen: boolean;
@@ -31,7 +30,6 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
   const searchParams = useSearchParams();
 
   const [localSearchQuery, setLocalSearchQuery] = useState(searchQuery);
-  const debouncedQuery = useDebounce(localSearchQuery, 500);
 
   // Opening animation
   useEffect(() => {
@@ -44,31 +42,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
       setAnimateIn(false);
       document.body.style.overflow = "";
     }
-  }, [isOpen]);
-
-  // Deobounce search query and update URL
-  useEffect(() => {
-    if (!isOpen) return;
-
-    if (debouncedQuery !== searchParams.get("query")) {
-      const params = new URLSearchParams(searchParams.toString());
-
-      if (debouncedQuery) {
-        params.set("query", debouncedQuery);
-      } else {
-        params.delete("query");
-      }
-
-      const category = searchParams.get("category");
-      if (category) {
-        params.set("category", category);
-      }
-
-      router.replace(`?${params.toString()}`, { scroll: false });
-
-      setSearchQuery(debouncedQuery);
-    }
-  }, [debouncedQuery, router, searchParams, isOpen]);
+  }, [isOpen, searchQuery]);
 
   // Close on escape key
   useEffect(() => {
@@ -101,15 +75,16 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
 
   const handleClearSearch = () => {
     setLocalSearchQuery("");
+
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("query");
+    router.push(`?${params.toString()}`);
+    setSearchQuery("");
+    onClose();
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLocalSearchQuery(e.target.value);
-  };
-
-  const handleClose = () => {
-    setSearchQuery(localSearchQuery);
-    onClose();
   };
 
   if (!isOpen) return null;
@@ -122,7 +97,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
     >
       <div className={styles.modalContent}>
         <button
-          onClick={handleClose}
+          onClick={onClose}
           className={styles.closeButton}
           aria-label="Close menu"
         >

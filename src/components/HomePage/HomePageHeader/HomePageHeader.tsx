@@ -6,10 +6,10 @@ import styles from "./HomePageHeader.module.scss";
 import { SearchIcon } from "@/components/svg/SearchIcon";
 import { BurgerMenuIcon } from "@/components/svg/BurgerMenuIcon";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useDebounce } from "@/hooks/useDebounce";
 import { MobileNavigation } from "./MobileNavigation";
 import { ProfileDropdown } from "./ProfileDropdown";
 import { UserType } from "@/types/index";
+import { IoCloseOutline } from "react-icons/io5";
 
 interface HomePageHeaderProps {
   activeTab: string;
@@ -29,36 +29,12 @@ export const HomePageHeader = ({
     searchParams.get("query") || "",
   );
 
-  const debouncedQuery = useDebounce(searchQuery, 500);
-
   useEffect(() => {
     const query = searchParams.get("query") || "";
     if (query !== searchQuery) {
       setSearchQuery(query);
     }
   }, [searchParams]);
-
-  useEffect(() => {
-    if (isMobileMenuOpen || debouncedQuery === searchParams.get("query")) {
-      return;
-    }
-    if (debouncedQuery !== searchParams.get("query")) {
-      const params = new URLSearchParams(searchParams.toString());
-
-      if (debouncedQuery) {
-        params.set("query", debouncedQuery);
-      } else {
-        params.delete("query");
-      }
-
-      const category = searchParams.get("category");
-      if (category) {
-        params.set("category", category);
-      }
-
-      router.replace(`?${params.toString()}`, { scroll: false });
-    }
-  }, [debouncedQuery, router, searchParams, isMobileMenuOpen]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -69,12 +45,20 @@ export const HomePageHeader = ({
 
     const params = new URLSearchParams(searchParams.toString());
 
-    if (searchQuery) {
-      params.set("query", searchQuery);
+    if (searchQuery.trim()) {
+      params.set("query", searchQuery.trim());
     } else {
       params.delete("query");
     }
 
+    router.push(`?${params.toString()}`);
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery("");
+    
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("query");
     router.push(`?${params.toString()}`);
   };
 
@@ -109,6 +93,17 @@ export const HomePageHeader = ({
             onChange={handleInputChange}
             aria-label="Search news articles"
           />
+
+          {searchQuery && (
+            <button
+              type="button"
+              onClick={handleClearSearch}
+              className={styles.clearButton}
+              aria-label="Clear search"
+            >
+              <IoCloseOutline size={24} />
+            </button>
+          )}
 
           <button
             type="submit"

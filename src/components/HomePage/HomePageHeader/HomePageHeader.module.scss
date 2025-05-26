@@ -53,11 +53,31 @@
   max-width: 725px;
   width: 100%;
 
-  svg {
+  .searchIcon {
     position: absolute;
     top: 50%;
     left: 16px;
     transform: translateY(-50%);
+  }
+
+  .clearButton {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888989;
+    font-size: 20px;
+
+    &:hover {
+      color: var(--primary);
+    }
+
+    @include md {
+      right: 110px;
+    }
   }
 
   input {
