@@ -54,6 +54,7 @@ Authentication is fully custom-built using Next.js server actions, providing a l
 Email Verification
 
 New users receive a verification link via email using Nodemailer. The email verification flow is fully integrated with the custom auth system and persists verification status in the database.
+NOTE: I used Gmail as a sender!
 
 Favoriting
 
