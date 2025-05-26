@@ -1,5 +1,5 @@
 import React from "react";
-import { HomePageContainer } from "@/components/HomePage/HomePageContainer";
+import { HomePage } from "@/components/HomePage/HomePage";
 import { NYTimesResponse } from "@/types/index";
 import { prisma } from "@/lib/prisma";
 import { cookies } from "next/headers";
@@ -93,7 +93,7 @@ const Home = async (props: HomePageProps) => {
     .then((res) => res.json())
     .then((data) => data?.results ?? []);
   return (
-    <HomePageContainer
+    <HomePage
       articles={articles?.docs}
       favorites={favorites}
       latestNews={latestNews}

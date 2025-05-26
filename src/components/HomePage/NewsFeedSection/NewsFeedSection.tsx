@@ -1,35 +1,35 @@
 "use client";
 
 import React from "react";
-import styles from "./HomePageMain.module.scss";
-import { HomePageMainCategories } from "./HomePageMainCategories/HomePageMainCategories";
+import styles from "./NewsFeedSection.module.scss";
+import { Categories } from "./Categories/Categories";
 import { Favorite, LatestNewsArticleType, NYTimesArticle } from "@/types/index";
-import { HomePageMainArticles } from "./HomePageMainArticles/Articles";
-import { FavoriteArticles } from "./HomePageMainArticles/FavoriteArticles";
+import { Articles } from "./Articles/Articles";
+import { FavoriteArticles } from "./Articles/FavoriteArticles";
 import { useSearchParams } from "next/navigation";
 
-interface HomePageMainProps {
+interface NewsFeedSectionProps {
   favorites?: Favorite[];
   articles?: NYTimesArticle[];
   latestNews?: LatestNewsArticleType[];
 }
 
-export const HomePageMain = ({
+export const NewsFeedSection = ({
   favorites,
   articles,
   latestNews,
-}: HomePageMainProps) => {
+}: NewsFeedSectionProps) => {
   const searchParams = useSearchParams();
   const category = searchParams.get("category") || "Home";
   return (
     <div className={styles.container}>
-      <HomePageMainCategories />
+      <Categories />
       <div className={styles.content}>
         <div className={styles.title}>News</div>
         {category === "Favorites" ? (
           <FavoriteArticles favorites={favorites} />
         ) : (
-          <HomePageMainArticles
+          <Articles
             articles={articles}
             favorites={favorites}
             latestNews={latestNews}

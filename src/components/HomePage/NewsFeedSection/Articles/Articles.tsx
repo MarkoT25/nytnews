@@ -7,17 +7,17 @@ import { Article } from "./Article";
 import { LatestNewsWidget } from "../LatestNewsWidget/LatestNewsWidget";
 import { useSearchParams } from "next/navigation";
 
-interface HomePageMainArticlesProps {
+interface ArticlesProps {
   articles?: NYTimesArticle[];
   favorites?: Favorite[];
   latestNews?: LatestNewsArticleType[];
 }
 
-export const HomePageMainArticles = ({
+export const Articles = ({
   articles,
   favorites,
   latestNews,
-}: HomePageMainArticlesProps) => {
+}: ArticlesProps) => {
   const [isLargeScreen, setIsLargeScreen] = useState(true);
   const [isMobileScreen, setIsMobileScreen] = useState(false);
   const searchParams = useSearchParams();

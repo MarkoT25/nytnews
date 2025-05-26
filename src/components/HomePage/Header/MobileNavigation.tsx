@@ -6,7 +6,7 @@ import styles from "./MobileNavigation.module.scss";
 import { IoCloseOutline } from "react-icons/io5";
 import { NewsAppLogo } from "@/components/svg/NewsAppLogoIcon";
 import { SearchIcon } from "@/components/svg/SearchIcon";
-import { HomePageMainCategories } from "../HomePageMain/HomePageMainCategories/HomePageMainCategories";
+import { Categories } from "../NewsFeedSection/Categories/Categories";
 
 interface MobileNavigationProps {
   isOpen: boolean;
@@ -134,7 +134,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
             />
           </form>
 
-          <HomePageMainCategories type="mobile" closeMobileNav={onClose} />
+          <Categories type="mobile" closeMobileNav={onClose} />
         </div>
       </div>
     </div>

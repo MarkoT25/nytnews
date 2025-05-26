@@ -4,7 +4,7 @@ import React, { useActionState } from "react";
 import { registerUser } from "@/lib/auth";
 import styles from "./RegisterForm.module.scss";
 import Link from "next/link";
-import { SubmitButton } from "../Custom/SubmitButton";
+import { SubmitButton } from "../ui/SubmitButton";
 import { IoMailOutline } from "react-icons/io5";
 
 export const RegisterForm = () => {

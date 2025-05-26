@@ -4,7 +4,7 @@ import { loginUser } from "@/lib/auth";
 import React, { useActionState } from "react";
 import styles from "./LoginForm.module.scss";
 import Link from "next/link";
-import { SubmitButton } from "../Custom/SubmitButton";
+import { SubmitButton } from "../ui/SubmitButton";
 
 export const LoginForm = () => {
   const [state, loginAction] = useActionState(loginUser, undefined);

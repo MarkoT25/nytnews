@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import styles from "./HomePageHeader.module.scss";
+import styles from "./Header.module.scss";
 import { GoPerson } from "react-icons/go";
 import { IoLogOutOutline } from "react-icons/io5";
 import { logoutUser } from "@/lib/auth";
