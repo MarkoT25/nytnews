@@ -13,6 +13,8 @@ interface MobileNavigationProps {
   onClose: () => void;
   activeTab: string;
   handleTabChange: (tab: string) => void;
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
 }
 
 export const MobileNavigation: React.FC<MobileNavigationProps> = ({
@@ -20,21 +22,22 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
   onClose,
   activeTab,
   handleTabChange,
+  searchQuery,
+  setSearchQuery,
 }) => {
   const router = useRouter();
   const [animateIn, setAnimateIn] = useState(false);
   const searchParams = useSearchParams();
-  const [searchQuery, setSearchQuery] = useState(
-    searchParams.get("query") || "",
-  );
 
-  const debouncedQuery = useDebounce(searchQuery, 500);
+  const [localSearchQuery, setLocalSearchQuery] = useState(searchQuery);
+  const debouncedQuery = useDebounce(localSearchQuery, 500);
 
   // Opening animation
   useEffect(() => {
     if (isOpen) {
       const timer = setTimeout(() => setAnimateIn(true), 10);
       document.body.style.overflow = "hidden";
+      setLocalSearchQuery(searchQuery);
       return () => clearTimeout(timer);
     } else {
       setAnimateIn(false);
@@ -42,12 +45,12 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
     }
   }, [isOpen]);
 
-  // Sync searchQuery with URL when mobile nav opens
-  useEffect(() => {
-    if (isOpen) {
-      setSearchQuery(searchParams.get("query") || "");
-    }
-  }, [isOpen, searchParams]);
+  // // Sync searchQuery with URL when mobile nav opens
+  // useEffect(() => {
+  //   if (isOpen) {
+  //     setSearchQuery(searchParams.get("query") || "");
+  //   }
+  // }, [isOpen, searchParams]);
 
   // Deobounce search query and update URL
   useEffect(() => {
@@ -68,6 +71,9 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
       }
 
       router.replace(`?${params.toString()}`, { scroll: false });
+
+      setSearchQuery(debouncedQuery);
+
     }
   }, [debouncedQuery, router, searchParams, isOpen]);
 
@@ -83,15 +89,17 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
     return () => document.removeEventListener("keydown", handleEscapeKey);
   }, [isOpen, onClose]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const params = new URLSearchParams(searchParams.toString());
 
-    if (searchQuery.trim()) {
-      params.set("query", searchQuery.trim());
+    if (localSearchQuery.trim()) {
+      params.set("query", localSearchQuery.trim());
+      setSearchQuery(localSearchQuery.trim());
     } else {
       params.delete("query");
+      setSearchQuery("");
     }
 
     router.push(`?${params.toString()}`);
@@ -99,11 +107,16 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
   };
 
   const handleClearSearch = () => {
-    setSearchQuery("");
+    setLocalSearchQuery("");
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
+    setLocalSearchQuery(e.target.value);
+  };
+
+  const handleClose = () => {
+    setSearchQuery(localSearchQuery);
+    onClose();
   };
 
   if (!isOpen) return null;
@@ -116,7 +129,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
     >
       <div className={styles.modalContent}>
         <button
-          onClick={onClose}
+          onClick={handleClose}
           className={styles.closeButton}
           aria-label="Close menu"
         >
@@ -137,7 +150,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
               <SearchIcon />
             </button>
 
-            {searchQuery !== "" && (
+            {localSearchQuery !== "" && (
               <button
                 type="button"
                 className={styles.clearSearchIcon}
@@ -151,7 +164,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
             <input
               type="text"
               placeholder="Search news"
-              value={searchQuery}
+              value={localSearchQuery}
               onChange={handleInputChange}
               aria-label="Search news articles"
             />

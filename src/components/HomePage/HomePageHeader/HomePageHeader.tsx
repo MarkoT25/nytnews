@@ -26,10 +26,17 @@ export const HomePageHeader = ({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState(
-    searchParams.get("query") || "",
+    searchParams.get("query") || ""
   );
 
   const debouncedQuery = useDebounce(searchQuery, 500);
+
+  useEffect(() => {
+    const query = searchParams.get("query") || "";
+    if (query !== searchQuery) {
+      setSearchQuery(query);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     if (isMobileMenuOpen || debouncedQuery === searchParams.get("query")) {
@@ -87,6 +94,9 @@ export const HomePageHeader = ({
           onClose={() => setIsMobileMenuOpen(false)}
           activeTab={activeTab}
           handleTabChange={handleTabChange}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+
         />
       </div>
       <div className={styles.searchAndProfile}>
