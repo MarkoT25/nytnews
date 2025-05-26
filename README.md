@@ -39,7 +39,6 @@ npm start
 ```
 ## Design
 
-🧠 Design Decisions
 SSR-first Approach
 
 The application embraces server-side rendering (SSR) for all key data to ensure fast initial loads, minimal layout shift, and full SEO benefits. Pages are fully rendered on the server and hydrated on the client for dynamic interactivity where needed.
