@@ -37,6 +37,12 @@
   width: 80px;
   height: 80px;
 
+  &:hover {
+    background-color: white;
+    border-radius: 8px;
+    // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
   span {
     color: #888989;
     font-weight: 600;
