@@ -1,6 +1,6 @@
 "use client";
 
-import { NewsAppLogo } from "@/components/svg/logo";
+import { NewsAppLogo } from "@/components/svg/NewsAppLogoIcon";
 import React, { useEffect, useState } from "react";
 import styles from "./HomePageHeader.module.scss";
 import { SearchIcon } from "@/components/svg/SearchIcon";

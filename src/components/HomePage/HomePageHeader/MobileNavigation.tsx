@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./MobileNavigation.module.scss";
 import { IoCloseOutline } from "react-icons/io5";
-import { NewsAppLogo } from "@/components/svg/logo";
+import { NewsAppLogo } from "@/components/svg/NewsAppLogoIcon";
 import { SearchIcon } from "@/components/svg/SearchIcon";
 import { HomePageMainCategories } from "../HomePageMain/HomePageMainCategories/HomePageMainCategories";
 import { useDebounce } from "@/hooks/useDebounce";
