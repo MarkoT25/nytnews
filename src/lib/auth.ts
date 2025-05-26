@@ -16,46 +16,6 @@ const signupSchema = z.object({
   confirmPassword: z.string().min(8),
 });
 
-// export async function registerUser(prevState: any, formData: FormData) {
-
-//     const data = Object.fromEntries(formData.entries());
-//     const parsedData = signupSchema.safeParse(data);
-
-//     if (!parsedData.success) {
-//         return { error: parsedData.error.format() };
-//     }
-
-//     const { email, firstName, lastName, password, confirmPassword } = parsedData.data;
-
-//     if (password !== confirmPassword) {
-//         return {
-//             error: {
-//                 confirmPassword: {
-//                     _errors: ["Passwords don't match"],
-//                 },
-//             },
-//         }
-//     }
-
-//     const existingUser = await prisma.user.findUnique({
-//         where: { email },
-//     });
-
-//     if (existingUser) {
-//         return { error: { email: { _errors: ["Email already exists"] } } };
-//     }
-//     const hashedPassword = await bcrypt.hash(password, 10);
-//     const user = await prisma.user.create({
-//         data: {
-//             email,
-//             firstName,
-//             lastName,
-//             passwordHash: hashedPassword,
-//         },
-//     });
-//     return { success: true, user };
-// }
-
 export async function registerUser(prevState: any, formData: FormData) {
   const data = Object.fromEntries(formData.entries());
   const parsedData = signupSchema.safeParse(data);
@@ -86,7 +46,6 @@ export async function registerUser(prevState: any, formData: FormData) {
   }
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  // Generate verification token
   const verificationToken = crypto.randomBytes(32).toString("hex");
 
   const user = await prisma.user.create({
