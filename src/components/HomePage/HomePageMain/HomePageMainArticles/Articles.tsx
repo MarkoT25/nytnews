@@ -48,7 +48,6 @@ export const HomePageMainArticles = ({
           const isFavorited = favorites?.some(
             (favorite) => favorite.url === article.web_url,
           );
-          //dont show this widget on small screens
           if (index === widgetPosition && shouldShowWidget) {
             return (
               <LatestNewsWidget

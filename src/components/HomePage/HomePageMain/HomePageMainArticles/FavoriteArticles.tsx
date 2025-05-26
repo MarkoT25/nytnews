@@ -8,9 +8,6 @@ export const FavoriteArticles = ({ favorites }: { favorites?: Favorite[] }) => {
     <div className={styles.articles}>
       {favorites && favorites?.length > 0 ? (
         favorites.map((article) => {
-          //   let isFavorited = favorites?.some(
-          //     (favorite) => favorite.url === article.web_url
-          //   );
           return (
             <FavoriteArticle
               key={article.id || article.url}
