@@ -1,0 +1,116 @@
+// Breakpoint variables
+$screen-sm: 640px;
+$screen-md: 768px;
+$screen-lg: 1024px;
+$screen-xl: 1280px;
+$screen-2xl: 1536px;
+
+// Media query mixins
+
+// Small devices (640px and up)
+@mixin sm {
+  @media (min-width: #{$screen-sm}) {
+    @content;
+  }
+}
+
+// Medium devices (768px and up)
+@mixin md {
+  @media (min-width: #{$screen-md}) {
+    @content;
+  }
+}
+
+// Large devices (1024px and up)
+@mixin lg {
+  @media (min-width: #{$screen-lg}) {
+    @content;
+  }
+}
+
+// Extra large devices (1280px and up)
+@mixin xl {
+  @media (min-width: #{$screen-xl}) {
+    @content;
+  }
+}
+
+// 2X Extra large devices (1536px and up)
+@mixin two-xl {
+  @media (min-width: #{$screen-2xl}) {
+    @content;
+  }
+}
+
+// Max-width breakpoints (for mobile-first development)
+
+// Small devices (max-width: 639px)
+@mixin max-xs {
+  @media (max-width: #{$screen-sm - 1px}) {
+    @content;
+  }
+}
+
+// Medium devices (max-width: 767px)
+@mixin max-sm {
+  @media (max-width: #{$screen-md - 1px}) {
+    @content;
+  }
+}
+
+// Large devices (max-width: 1023px)
+@mixin max-md {
+  @media (max-width: #{$screen-lg - 1px}) {
+    @content;
+  }
+}
+
+// Extra large devices (max-width: 1279px)
+@mixin max-lg {
+  @media (max-width: #{$screen-xl - 1px}) {
+    @content;
+  }
+}
+
+// 2X Extra large devices (max-width: 1535px)
+@mixin max-xl {
+  @media (max-width: #{$screen-2xl - 1px}) {
+    @content;
+  }
+}
+
+// Range mixins (between breakpoints)
+
+// Between small and medium (640px - 767px)
+@mixin sm-only {
+  @media (min-width: #{$screen-sm}) and (max-width: #{$screen-md - 1px}) {
+    @content;
+  }
+}
+
+// Between medium and large (768px - 1023px)
+@mixin md-only {
+  @media (min-width: #{$screen-md}) and (max-width: #{$screen-lg - 1px}) {
+    @content;
+  }
+}
+
+// Between large and extra large (1024px - 1279px)
+@mixin lg-only {
+  @media (min-width: #{$screen-lg}) and (max-width: #{$screen-xl - 1px}) {
+    @content;
+  }
+}
+
+// Between extra large and 2x extra large (1280px - 1535px)
+@mixin xl-only {
+  @media (min-width: #{$screen-xl}) and (max-width: #{$screen-2xl - 1px}) {
+    @content;
+  }
+}
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

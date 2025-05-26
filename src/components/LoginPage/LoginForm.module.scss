@@ -1,0 +1,161 @@
+@use "../../styles/mixins.scss" as *;
+
+.loginContainer {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+  @include flexCenter;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.loginForm {
+  width: 100%;
+  max-width: 420px;
+  padding: 40px;
+  background-color: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+
+  h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+}
+
+.formGroup {
+  margin-bottom: 24px;
+
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 8px;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e1e5eb;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    background-color: white;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: #1e71bb;
+      box-shadow: 0 0 0 3px rgba(30, 113, 187, 0.15);
+    }
+
+    &::placeholder {
+      color: #aab7c4;
+    }
+  }
+}
+
+.errorMessage {
+  @include flexCenter;
+  color: #e53935;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 14px;
+  background-color: #1e71bb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 8px;
+
+  &:hover {
+    background-color: #1a5d9a;
+  }
+
+  &:active {
+    background-color: #165086;
+  }
+
+  &:disabled {
+    background-color: #b0bec5;
+    cursor: not-allowed;
+  }
+}
+
+.loginFooter {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+
+  a {
+    color: #bb1e1e;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 24px 0;
+
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #e1e5eb;
+  }
+
+  span {
+    padding: 0 16px;
+    color: #90a4ae;
+    font-size: 14px;
+  }
+}
+
+.socialLogin {
+  display: flex;
+  gap: 16px;
+
+  button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background-color: white;
+    border: 1px solid #e1e5eb;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #f5f5f5;
+    }
+
+    svg {
+      font-size: 18px;
+    }
+  }
+}

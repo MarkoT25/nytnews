@@ -1,0 +1,196 @@
+@use "../../styles/mixins.scss" as *;
+
+.registerContainer {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+  @include flexCenter;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.registerForm {
+  width: 100%;
+  max-width: 480px;
+  padding: 40px;
+  background-color: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+
+  h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+}
+
+// Success screen styles
+.successContainer {
+  width: 100%;
+  max-width: 480px;
+  padding: 40px;
+  background-color: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  text-align: center;
+
+  h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+    margin: 24px 0 16px;
+  }
+
+  p {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+}
+
+.successIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  background-color: rgba(30, 113, 187, 0.1);
+  border-radius: 50%;
+  color: #1e71bb;
+}
+
+.emailNote {
+  font-size: 14px !important;
+  color: #666 !important;
+  font-style: italic;
+}
+
+.loginLink {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 12px 24px;
+  background-color: #1e71bb;
+  color: white !important;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #1a5d9a;
+  }
+}
+
+// Existing styles
+.formGroup {
+  margin-bottom: 20px;
+
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 8px;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e1e5eb;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    background-color: white;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: #1e71bb;
+      box-shadow: 0 0 0 3px rgba(30, 113, 187, 0.15);
+    }
+
+    &::placeholder {
+      color: #aab7c4;
+    }
+  }
+}
+
+.formRow {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .formGroup {
+    flex: 1;
+    margin-bottom: 0;
+  }
+}
+
+.errorMessage {
+  color: #e53935;
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+// Add general error message styling
+.generalError {
+  background-color: rgba(229, 57, 53, 0.1);
+  border-left: 3px solid #e53935;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  border-radius: 4px;
+
+  p {
+    color: #d32f2f;
+    font-size: 14px;
+    margin: 0;
+
+    &:not(:last-child) {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+.registerFooter {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+
+  a {
+    color: #bb1e1e;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.terms {
+  margin-top: 16px;
+  margin-bottom: 24px;
+  font-size: 13px;
+  color: #666;
+  text-align: center;
+
+  a {
+    color: #1e71bb;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

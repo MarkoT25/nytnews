@@ -1,0 +1,51 @@
+@use "../../styles/mixins.scss" as *;
+
+.pageContainer {
+  @include flexCenter;
+  flex-direction: column;
+  padding: 0 4px 0 8px;
+}
+
+.selectorContainer {
+  @include flexCenter;
+  flex-direction: row;
+  width: 100%;
+  gap: 24px;
+  margin-top: 50px;
+
+  button {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 6px 8px 6px 8px;
+  }
+
+  .activeOption {
+    color: #bb1e1e;
+    background-color: #bb1e1e1a;
+    border-radius: 20px;
+  }
+
+  @include md {
+    display: none;
+  }
+}
+
+.desktopMain {
+  display: none;
+
+  @include md {
+    @include flexCenter;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.mobileMain {
+  @include flexCenter;
+  flex-direction: column;
+  width: 100%;
+
+  @include md {
+    display: none;
+  }
+}
