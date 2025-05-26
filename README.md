@@ -1,14 +1,10 @@
-
 # News App
 
 A full-stack application for browsing and bookmarking the latest news stories across multiple categories. Users can register, sign in, explore categorized news articles, bookmark favorites, and view them across the app.
 
-
-
 ## Getting Started
 
 To get started, you'll need to clone the repository and install the dependencies. You'll also need to create copy the .env.example file to .env and fill in the necessary values. You'll also need to create a copy of the .env.example at for prisma at @/prisma/.env
-
 
 ## Installation
 
@@ -18,27 +14,37 @@ To get started, you'll need to clone the repository and install the dependencies
   git clone https://github.com/MarkoT25/nytnews.git
   cd nytnews
 ```
+
 2. Install dependencies
+
 ```bash
    npm install
 ```
 
 3. Create a `.env` file
 
-4. Run prisma migration commands
+4. Prisma
+
+```bash
+  npx prisma generate
+  npx prisma migrate deploy
+```
 
 ## Running the Application
 
 Development mode:
+
 ```
 npm run dev
 ```
 
 Production mode:
+
 ```
 npm run build
 npm start
 ```
+
 ## Design
 
 SSR-first Approach
