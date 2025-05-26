@@ -7,7 +7,7 @@ A full-stack application for browsing and bookmarking the latest news stories ac
 
 ## Getting Started
 
-To get started, you'll need to clone the repository and install the dependencies. You'll also need to create copy the .env.example file to .env and fill in the necessary values.
+To get started, you'll need to clone the repository and install the dependencies. You'll also need to create copy the .env.example file to .env and fill in the necessary values. You'll also need to create a copy of the .env.example at for prisma at @/prisma/.env
 
 
 ## Installation
@@ -24,6 +24,8 @@ To get started, you'll need to clone the repository and install the dependencies
 ```
 
 3. Create a `.env` file
+
+4. Run prisma migration commands
 
 ## Running the Application
 
