@@ -1,6 +1,5 @@
 @use "../../styles/mixins.scss" as *;
 
-
 .pageContainer {
   @include flexCenter;
   flex-direction: column;
@@ -21,7 +20,6 @@
   }
 
   .activeOption {
-    //use  --primary-color variable from global.scss
     color: var(--primary-color);
     color: #bb1e1e;
     background-color: #bb1e1e1a;
