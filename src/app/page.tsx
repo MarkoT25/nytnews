@@ -2,7 +2,8 @@ import React from "react";
 import { HomePageContainer } from "@/components/HomePage/HomePageContainer";
 import { NYTimesResponse } from "@/types/index";
 import { prisma } from "@/lib/prisma";
-import { getAuthUser } from "@/util/auth";
+import { cookies } from "next/headers";
+import { decrypt } from "@/lib/session";
 
 interface HomePageProps {
   searchParams: Promise<{
@@ -13,7 +14,35 @@ interface HomePageProps {
 }
 
 const Home = async (props: HomePageProps) => {
-  const user = await getAuthUser();
+  const cookieStore = await cookies();
+  const sessionToken = cookieStore.get("session")?.value;
+
+  if (!sessionToken) {
+    return null;
+  }
+
+  const session = await decrypt(sessionToken);
+
+  if (!session || !session.userId) {
+    return null;
+  }
+
+  const expiresAt = new Date(session.expiresAt as string);
+  if (expiresAt < new Date()) {
+    return null;
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { id: session.userId as string },
+    select: {
+      id: true,
+      email: true,
+      firstName: true,
+      lastName: true,
+      emailVerified: true,
+      createdAt: true,
+    },
+  });
 
   const searchParams = await props.searchParams;
 
@@ -26,7 +55,7 @@ const Home = async (props: HomePageProps) => {
   const apiKey = process.env.NEW_YORK_TIMES_API_KEY;
 
   const url = new URL(
-    "https://api.nytimes.com/svc/search/v2/articlesearch.json",
+    "https://api.nytimes.com/svc/search/v2/articlesearch.json"
   );
 
   if (query) {
@@ -59,7 +88,7 @@ const Home = async (props: HomePageProps) => {
 
   // Prefetching latest news for initial data at Latest News Widget
   const latestNews = await fetch(
-    `${process.env.NEXT_PUBLIC_APP_URL}/api/latest-news?offset=0&limit=20`,
+    `${process.env.NEXT_PUBLIC_APP_URL}/api/latest-news?offset=0&limit=20`
   )
     .then((res) => res.json())
     .then((data) => data?.results ?? []);
