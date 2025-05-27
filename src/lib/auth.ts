@@ -9,11 +9,15 @@ import crypto from "crypto";
 import { sendVerificationEmail } from "./mail";
 
 const signupSchema = z.object({
-  email: z.string().email(),
-  firstName: z.string().min(1),
-  lastName: z.string().min(1),
-  password: z.string().min(8),
-  confirmPassword: z.string().min(8),
+  email: z.string().email({ message: "Please enter a valid email address" }),
+  firstName: z.string().min(1, { message: "First name is required" }),
+  lastName: z.string().min(1, { message: "Last name is required" }),
+  password: z.string().min(8, {
+    message: "Password must have at least 8 characters"
+  }),
+  confirmPassword: z.string().min(8, {
+    message: "Password must have at least 8 characters"
+  }),
 });
 
 export async function registerUser(prevState: any, formData: FormData) {
@@ -73,8 +77,10 @@ export async function registerUser(prevState: any, formData: FormData) {
 }
 
 const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
+  email: z.string().email({ message: "Please enter a valid email address" }),
+  password: z.string().min(8, {
+    message: "Password must have at least 8 characters"
+  }),
 });
 
 export async function loginUser(prevState: any, formData: FormData) {
