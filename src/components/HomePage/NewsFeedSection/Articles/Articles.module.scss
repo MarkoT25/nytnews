@@ -101,6 +101,14 @@
   .contentCreator {
     p {
       font-size: 12px;
+      line-height: 1.2;
+      max-height: 2.4em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      line-clamp: 1;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical; 
     }
   }
 }
